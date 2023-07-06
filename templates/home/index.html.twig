@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<h2>Catalogue des livres</h2>
+
+{% for livre in livres %}
+<article>
+    {# @todo #}
+    {# <h3><a href="{{ path('app_livre_show', {id: livre.id}) }}">{{ livre.titre }}</a></h3> #}
+    <ul>
+        <li>{{ livre.auteur.prenom }} {{ livre.auteur.nom }}</li>
+        <li>{{ livre.anneeEdition }}</li>
+        <li>{{ livre.nombrePages }}</li>
+        <li>{{ livre.codeIsbn }}</li>
+    </ul>
+</article>
+{% endfor %}
+
+{% endblock %}

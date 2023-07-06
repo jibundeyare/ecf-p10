@@ -14,6 +14,24 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <nav>
+                <a href="{{ path('app_home') }}">accueil</a>
+                {# @todo #}
+                {# <a href="{{ path('app_login') }}">connexion</a>
+                {% if true %}
+                <a href="{{ path('app_logout') }}">déconnexion</a>
+                {% endif %}
+                {% if true %}
+                <a href="{{ path('foo') }}">utilisateurs</a>
+                <a href="{{ path('foo') }}">livres</a>
+                <a href="{{ path('foo') }}">auteurs</a>
+                <a href="{{ path('foo') }}">emprunteurs</a>
+                <a href="{{ path('foo') }}">emprunts</a>
+                {% endif %} #}
+            </nav>
+            <h1>ECF P10</h1>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
