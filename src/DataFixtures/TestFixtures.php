@@ -3,8 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Auteur;
+use App\Entity\Emprunteur;
+use App\Entity\Emprunt;
 use App\Entity\Livre;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -31,12 +34,13 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
-        $this->loadUsers();
+        $this->loadUsersEmprunteurs();
         $this->loadAuteurs();
         $this->loadLivres();
+        $this->loadEmprunts();
     }
 
-    public function loadUsers()
+    public function loadUsersEmprunteurs()
     {
         // static test data
         $datas = [
@@ -76,6 +80,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         ];
 
         foreach ($datas as $data) {
+            // create user
             $user = new User();
             $user->setEmail($data['email']);
             $user->setRoles($data['roles']);
@@ -87,7 +92,14 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
             $this->manager->persist($user);
 
-            // @todo insert borrowers
+            // create borrowers
+            $emprunteur = new Emprunteur();
+            $emprunteur->setNom($data['nom']);
+            $emprunteur->setPrenom($data['prenom']);
+            $emprunteur->setTel($data['tel']);
+            $emprunteur->setUser($user);
+
+            $this->manager->persist($emprunteur);
         }
 
         $this->manager->flush();
@@ -105,7 +117,14 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
             $this->manager->persist($user);
 
-            // @todo insert borrowers
+            // create borrowers
+            $emprunteur = new Emprunteur();
+            $emprunteur->setNom($this->faker->lastName());
+            $emprunteur->setPrenom($this->faker->firstName());
+            $emprunteur->setTel($this->faker->phoneNumber());
+            $emprunteur->setUser($user);
+
+            $this->manager->persist($emprunteur);
         }
 
         $this->manager->flush();
@@ -222,6 +241,50 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $livre->setAuteur($auteurs[$auteurIndex]);
 
             $this->manager->persist($livre);
+        }
+
+        $this->manager->flush();
+    }
+
+    public function loadEmprunts()
+    {
+        $repositoryEmprunteur = $this->manager->getRepository(Emprunteur::class);
+
+        $repositoryLivre = $this->manager->getRepository(Livre::class);
+
+        $datas = [
+            [
+                'dateEmprunt' => DateTime::createFromFormat('Y-m-d H:i:s','2020-02-01 10:00:00'),
+                'dateRetour' => DateTime::createFromFormat('Y-m-d H:i:s','2020-03-01 10:00:00'),
+                'emprunteurId' => 1,
+                'livreId' => 1,
+            ],
+            [
+                'dateEmprunt' => DateTime::createFromFormat('Y-m-d H:i:s','2020-03-01 10:00:00'),
+                'dateRetour' => DateTime::createFromFormat('Y-m-d H:i:s','2020-04-01 10:00:00'),
+                'emprunteurId' => 2,
+                'livreId' => 2,
+            ],
+            [
+                'dateEmprunt' => DateTime::createFromFormat('Y-m-d H:i:s','2020-04-01 10:00:00'),
+                'dateRetour' => null,
+                'emprunteurId' => 3,
+                'livreId' => 3,
+            ],
+        ];
+
+        foreach ($datas as $data) {
+            $emprunt = new Emprunt();
+            $emprunt->setDateEmprunt($data['dateEmprunt']);
+            $emprunt->setDateRetour($data['dateRetour']);
+
+            $emprunteur = $repositoryEmprunteur->find($data['emprunteurId']);
+            $emprunt->setEmprunteur($emprunteur);
+
+            $livre = $repositoryLivre->find($data['livreId']);
+            $emprunt->setLivre($livre);
+
+            $this->manager->persist($emprunt);
         }
 
         $this->manager->flush();
