@@ -8,7 +8,7 @@ Ce repo contient le projet pour l'ECF  back de la promo 10 de Pop School Lens.
 git clone https://github.com/jibundeyare/ecf-p10
 cd ecf-p10
 composer install
-# edit .env.local
+# create your .env.local
 bin/dofilo.sh
 symfony serve
 ```
