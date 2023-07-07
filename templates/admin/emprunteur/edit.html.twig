@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Emprunteur{% endblock %}
+
+{% block body %}
+    <h1>Edit Emprunteur</h1>
+
+    {{ include('admin/emprunteur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_emprunteur_index') }}">back to list</a>
+
+    {{ include('admin/emprunteur/_delete_form.html.twig') }}
+{% endblock %}

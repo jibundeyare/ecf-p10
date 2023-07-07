@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Emprunteur{% endblock %}
+
+{% block body %}
+    <h1>Create new Emprunteur</h1>
+
+    {{ include('admin/emprunteur/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_emprunteur_index') }}">back to list</a>
+{% endblock %}

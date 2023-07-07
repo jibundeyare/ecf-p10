@@ -6,6 +6,7 @@ use App\Repository\EmprunteurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmprunteurRepository::class)]
 class Emprunteur
@@ -27,6 +28,7 @@ class Emprunteur
     #[ORM\OneToMany(mappedBy: 'emprunteur', targetEntity: Emprunt::class)]
     private Collection $emprunts;
 
+    #[Assert\NotBlank]
     #[ORM\OneToOne(inversedBy: 'emprunteur', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;

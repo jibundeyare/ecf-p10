@@ -26,15 +26,6 @@ class UserType extends AbstractType
                 'expanded' => true,
             ])
             ->add('enabled')
-            ->add('emprunteur', EntityType::class, [
-                'class' => Emprunteur::class,
-                'choice_label' => function(Emprunteur $emprunteur) {
-                    return "{$emprunteur->getNom()} {$emprunteur->getPrenom()}";
-                },
-                'multiple' => false,
-                'expanded' => false,
-                'required' => false,
-            ])
         ;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
