@@ -17,18 +17,21 @@
         <header>
             <nav>
                 <a href="{{ path('app_home') }}">accueil</a>
-                {# @todo #}
-                {# <a href="{{ path('app_login') }}">connexion</a>
-                {% if true %}
-                <a href="{{ path('app_logout') }}">déconnexion</a>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_logout') }}">déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">connexion</a>
                 {% endif %}
-                {% if true %}
-                <a href="{{ path('foo') }}">utilisateurs</a>
-                <a href="{{ path('foo') }}">livres</a>
-                <a href="{{ path('foo') }}">auteurs</a>
-                <a href="{{ path('foo') }}">emprunteurs</a>
-                <a href="{{ path('foo') }}">emprunts</a>
-                {% endif %} #}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    {# @todo #}
+                    {# <a href="{{ path('app_user_index') }}">utilisateurs</a>
+                    <a href="{{ path('app_livre_index') }}">livres</a>
+                    <a href="{{ path('app_auteur_index') }}">auteurs</a>
+                    <a href="{{ path('app_emprunteur_index') }}">emprunteurs</a> #}
+                    <a href="{{ path('app_emprunt_index') }}">emprunts</a>
+                {% endif %}
             </nav>
             <h1>ECF P10</h1>
         </header>

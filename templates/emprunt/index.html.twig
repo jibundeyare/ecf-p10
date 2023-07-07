@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emprunt index{% endblock %}
+
+{% block body %}
+    <h1>Emprunt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateEmprunt</th>
+                <th>DateRetour</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emprunt in emprunts %}
+            <tr>
+                <td>{{ emprunt.id }}</td>
+                <td>{{ emprunt.dateEmprunt ? emprunt.dateEmprunt|date('Y-m-d') : '' }}</td>
+                <td>{{ emprunt.dateRetour ? emprunt.dateRetour|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_emprunt_show', {'id': emprunt.id}) }}">show</a>
+                    <a href="{{ path('app_emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_emprunt_new') }}">Create new</a>
+{% endblock %}

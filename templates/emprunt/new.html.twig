@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Emprunt{% endblock %}
+
+{% block body %}
+    <h1>Create new Emprunt</h1>
+
+    {{ include('emprunt/_form.html.twig') }}
+
+    <a href="{{ path('app_emprunt_index') }}">back to list</a>
+{% endblock %}
