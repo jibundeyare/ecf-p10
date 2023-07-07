@@ -24,7 +24,9 @@
 
     <a href="{{ path('app_emprunt_index') }}">back to list</a>
 
-    <a href="{{ path('app_emprunt_edit', {'id': emprunt.id}) }}">edit</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_emprunt_edit', {'id': emprunt.id}) }}">edit</a>
 
-    {{ include('emprunt/_delete_form.html.twig') }}
+        {{ include('emprunt/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
