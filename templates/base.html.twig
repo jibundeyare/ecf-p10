@@ -20,6 +20,7 @@
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_logout') }}">déconnexion</a>
+                    <a href="{{ path('app_emprunt_index') }}">emprunts (everyone)</a>
                 {% else %}
                     <a href="{{ path('app_login') }}">connexion</a>
                 {% endif %}
@@ -29,7 +30,7 @@
                     <a href="{{ path('app_admin_livre_index') }}">livres</a>
                     <a href="{{ path('app_admin_user_index') }}">utilisateurs</a>
                     <a href="{{ path('app_admin_emprunteur_index') }}">emprunteurs</a>
-                    <a href="{{ path('app_emprunt_index') }}">emprunts</a>
+                    <a href="{{ path('app_admin_emprunt_index') }}">emprunts (admin only)</a>
                 {% endif %}
             </nav>
             <h1>ECF P10</h1>
