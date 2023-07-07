@@ -8,8 +8,7 @@
 
 {% for livre in livres %}
 <article>
-    {# @todo #}
-    {# <h3><a href="{{ path('app_livre_show', {id: livre.id}) }}">{{ livre.titre }}</a></h3> #}
+    <h3><a href="{{ path('app_livre_show', {id: livre.id}) }}">{{ livre.titre }}</a></h3>
     <ul>
         <li>{{ livre.auteur.prenom }} {{ livre.auteur.nom }}</li>
         <li>{{ livre.anneeEdition }}</li>

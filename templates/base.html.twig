@@ -27,9 +27,9 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     {# @todo #}
                     {# <a href="{{ path('app_user_index') }}">utilisateurs</a>
-                    <a href="{{ path('app_livre_index') }}">livres</a>
                     <a href="{{ path('app_auteur_index') }}">auteurs</a>
                     <a href="{{ path('app_emprunteur_index') }}">emprunteurs</a> #}
+                    <a href="{{ path('app_admin_livre_index') }}">livres</a>
                     <a href="{{ path('app_emprunt_index') }}">emprunts</a>
                 {% endif %}
             </nav>
